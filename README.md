@@ -1,78 +1,85 @@
-# 📖 About
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-The challenge is designed to provide a simple but interesting and playful challenge to solve. The goal is to validate that your skills meet the project requirements.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-Be aware that even though it's a simple challenge, it still takes some time to solve.
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## What we are looking for in a candidate
+## Description
 
-- 🧠 Analytical mind
-- 📐 Data modeling and API design skills
-- 👨‍💻 Software engineering excellence
-- 🔌 Basic DevOps skills
-- 🔍 Attention to detail
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## ⌨️ The Code challenge
+## Project setup
 
-### 1. Business requirements
+```bash
+$ yarn install
+```
 
-You are provided with a catalog of Pokemons (check out [pokemons.json](./pokemons.json)). The catalog includes basic information about Pokemons, their statistics, and relationships. Your task is to implement an API that would serve data needed by a website where users can browse the catalog and save their favorite Pokemon.
+## Compile and run the project
 
-> 💡 **_Hint:_**  We're testing your **`🧠 Analytical mind`** skills. You have a data file, but you don't have a proper specification.
+```bash
+# development
+$ yarn run start
 
-### 2. Functional requirements
+# watch mode
+$ yarn run start:dev
 
-The RESTful API should implement methods to:
-- get a list of Pokemons, including:
-  - pagination
-  - search by name
-  - filter by Pokemon type
-  - filter by favorite
-- get a Pokemon by id
-- get a Pokemon by name
-- get a list of Pokemon types
-- set/unset Pokemon as favorite
+# production mode
+$ yarn run start:prod
+```
 
-> 💡 **_Hint:_**  We're testing your **`📐 Data modeling and API design skills`**. Databases and interfaces have some design techniques (and best practices).
+## Run tests
 
-### 3. Non-functional requirements
+```bash
+# unit tests
+$ yarn run test
 
-We want you to implement a pseudo-Bearer authentication. Just showcase the bare minimum building blocks. No need for CRUD operations or a full-fledged solution. The goal is to identify and link a user to his favorite items.
+# e2e tests
+$ yarn run test:e2e
 
-> 💡 **_Hint:_**  We're testing your **`👨‍💻 Software engineering excellence`** skills. The task could sound complicated, but the trick is not to over-engineer it.
+# test coverage
+$ yarn run test:cov
+```
 
-### 4. Tech stack
+## Resources
 
-We have pretty simple tech stack requirements that you should try to meet:
+Check out a few resources that may come in handy when working with NestJS:
 
-- `git`
-  - Please commit your code every day or whenever you finish more extensive functionality. We want to see your progress.
-- `Node.js`
-  - The version is up to you. But specify it in the code through [nvm](https://github.com/nvm-sh/nvm).
-- `yarn`
-  - We prefer it over `npm`.
-- `TypeScript`
-  - A typing system is essential in our projects. Avoid using `any`. Follow best practices.
-- `Docker`
-  - Every backend developer should know about DevOps. Therefore, your solution should include a [Compose file](https://docs.docker.com/compose/compose-file/03-compose-file/).  
-  > 💡 **_Hint:_**  We're testing your **`🔌 Basic DevOps skills`**. For instance, we care about multi-stage builds, leveraging build cache, or non-root privileges.
-- `Jest`
-  - Jest is how we test.
-- `Swagger/OpenAPI`
-  - We use OpenAPI specs for data validations and contractual agreements between systems/tools.
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-For the **Brainio project**:
-- `MongoDB`
-- `Mongoose`
-  - You should utilize `seeding`.
-- `NestJS`
-  
-For the **Big AI Models** project:
-- `PostgreSQL`
-- `MikroORM`
-  - You should utilize `migrations` and `seeding`.
-- `Fastify`
+## Support
 
-## How should it work
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-We expect that we just run `docker compose up` and everything "automagically" sets up and runs. The application should console out the URL of the API endpoint and the swagger/OpenAPI specification.
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
