@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { PokemonModule } from 'src/entities/pokemon/pokemon.module';
+import { PokemonTypeModule } from 'src/entities/pokemon_type/pokemon_type.module';
+import { PokemonAttackModule } from 'src/entities/pokemon_attack/pokemon_attack.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { PokemonModule } from 'src/entities/pokemon/pokemon.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
 
     PokemonModule,
+    PokemonTypeModule,
+    PokemonAttackModule,
   ],
   providers: [SeederService],
 })
