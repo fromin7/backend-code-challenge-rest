@@ -7,15 +7,19 @@ import * as path from 'path';
 import { Pokemon, PokemonDocument } from 'src/entities/pokemon/pokemon.model';
 import { PokemonType, PokemonTypeDocument } from 'src/entities/pokemon_type/pokemon_type.model';
 import { PokemonAttack, PokemonAttackDocument } from 'src/entities/pokemon_attack/pokemon_attack.model';
+import { User, UserDocument } from 'src/entities/user/user.model';
 
 import { PokemonJsonRecord, PokemonsJson } from './seeder.types';
 import { ObjectId } from 'mongoose';
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class SeederService implements OnApplicationBootstrap {
   private pokemonInsertObj: Pokemon[] = [];
 
   constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
     @InjectModel(Pokemon.name) private pokemonModel: Model<PokemonDocument>,
     @InjectModel(PokemonType.name) private pokemonTypeModel: Model<PokemonTypeDocument>,
     @InjectModel(PokemonAttack.name) private pokemonAttackModel: Model<PokemonAttackDocument>,
@@ -28,7 +32,12 @@ export class SeederService implements OnApplicationBootstrap {
 
     try {
       console.log('Clearing old database entries...');
-      await Promise.all([this.pokemonModel.deleteMany({}), this.pokemonTypeModel.deleteMany({}), this.pokemonAttackModel.deleteMany({})]);
+      await Promise.all([
+        this.userModel.deleteMany({}),
+        this.pokemonModel.deleteMany({}),
+        this.pokemonTypeModel.deleteMany({}),
+        this.pokemonAttackModel.deleteMany({}),
+      ]);
 
       // Note: I am loading the whole data in the memory here. This will suffice for this amount of data, but if it grew rapidly,
       // converting this to a stream may be necessary.
@@ -41,6 +50,18 @@ export class SeederService implements OnApplicationBootstrap {
 
       await Promise.all(promises);
       await this.pokemonModel.insertMany(this.pokemonInsertObj);
+
+      console.log('Creating users...');
+      const users: User[] = [];
+      for (let i = 1; i <= 9; i++) {
+        const salt = await bcrypt.genSalt(10);
+        users.push({
+          identifier: `USER${i}`,
+          pin: await bcrypt.hash(`000${i}`, salt),
+          favoritePokemonIds: [],
+        });
+      }
+      await this.userModel.insertMany(users);
 
       console.log('✅ Completed successfully!');
     } catch (e) {

@@ -4,7 +4,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { PokemonDimensions, PokemonEvolutionRequirements } from './Pokemon.model.nontrivials';
 import { PokemonAttack } from '../pokemon_attack/pokemon_attack.model';
 
-@Schema({ collection: 'pokemons' })
+@Schema({ collection: 'pokemons', timestamps: true })
 export class Pokemon {
   @Prop({ type: Number, required: true })
   _id: number;
@@ -56,7 +56,7 @@ export class Pokemon {
     ],
     required: true,
   })
-  evolutions: number[]; // todo: typ po populate (všude)
+  evolutions: number[];
 
   @Prop({ type: Number, required: true })
   maxCP: number;

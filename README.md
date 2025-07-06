@@ -1,5 +1,9 @@
 todo: finish this.
 
+# Setup & User Credentials
+
+The seeder inserts 9 users with identifiers "USER[number]" and PIN that corresponds with the user number (i.e. USER1 has PIN 0001, USER2 has 0002 etc.). You can use the identifier and the PIN to obtain a signed JWT token from the corresponding endpoint.
+
 # Data Modelling Pattern
 
 Since it is not entirely clear how the app may or may not develop further, there is no one single correct way to model the data. I am adding comments on why I decided to model the data the way I did below.

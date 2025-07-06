@@ -1,7 +1,7 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema({ collection: 'pokemon_attacks' })
+@Schema({ collection: 'pokemon_attacks', timestamps: true })
 export class PokemonAttack {
   @Prop({ type: String, required: true })
   name: string;
