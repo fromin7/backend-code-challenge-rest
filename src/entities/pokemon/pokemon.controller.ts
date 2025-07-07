@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, Query, DefaultValuePipe, ParseBoolPipe, UseGuards, Req, Put, Delete } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PokemonService } from 'src/entities/pokemon/pokemon.service';
+import { RequestWithUser } from 'src/auth/auth.types';
 
 import { PaginatedList } from 'src/entities/pokemon/pokemon.service';
 
@@ -15,33 +16,34 @@ export class PokemonController {
 
   @Get()
   getPokemons(
-    @Req() req: Request & { user: { identifier: string } },
+    @Req() req: RequestWithUser,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
     @Query('nameSearchQuery') nameSearchQuery?: string,
     @Query('typeFilter') typeFilter?: string,
     @Query('isFavoriteFilter', new DefaultValuePipe(false), ParseBoolPipe) isFavoriteFilter?: boolean,
   ): Promise<PaginatedList<Pokemon>> {
-    return this.pokemonService.getList(req.user.identifier, limit, offset, nameSearchQuery, typeFilter, isFavoriteFilter);
+    console.log(isFavoriteFilter);
+    return this.pokemonService.getList(req.user.id, limit, offset, nameSearchQuery, typeFilter, isFavoriteFilter);
   }
 
   @Get(':id(\\d+)')
-  getPokemonById(@Req() req: Request & { user: { identifier: string } }, @Param('id', ParseIntPipe) id: number): Promise<Pokemon> {
-    return this.pokemonService.getOneById(req.user.identifier, id);
+  getPokemonById(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<Pokemon> {
+    return this.pokemonService.getOneById(req.user.id, id);
   }
 
   @Get('name/:name')
-  getPokemonByName(@Req() req: Request & { user: { identifier: string } }, @Param('name') name: string): Promise<Pokemon> {
-    return this.pokemonService.getOneByName(req.user.identifier, name);
+  getPokemonByName(@Req() req: RequestWithUser, @Param('name') name: string): Promise<Pokemon> {
+    return this.pokemonService.getOneByName(req.user.id, name);
   }
 
   @Put(':id/favorite-flag')
-  markAsFavorite(@Req() req: Request & { user: { identifier: string } }, @Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.pokemonService.setFavoriteFlag(req.user.identifier, id);
+  markAsFavorite(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.pokemonService.setFavoriteFlag(req.user.id, id);
   }
 
   @Delete(':id/favorite-flag')
-  unmarkAsFavorite(@Req() req: Request & { user: { identifier: string } }, @Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.pokemonService.removeFavoriteFlag(req.user.identifier, id);
+  unmarkAsFavorite(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.pokemonService.removeFavoriteFlag(req.user.id, id);
   }
 }
