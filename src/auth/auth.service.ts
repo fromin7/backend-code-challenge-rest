@@ -14,25 +14,35 @@ export class AuthService {
     @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
-  async verifyCredentials(identifier: string, pin: string): Promise<boolean> {
-    const user = await this.userModel.findOne({ identifier }).exec();
-    if (!user) {
-      return false;
+  async verifyCredentials(identifier: string, pin: string): Promise<string | null> {
+    const user = await this.userModel.findOne({ identifier }).select(['_id', 'pin']).exec();
+    if (!user._id) {
+      return null;
     }
 
-    return bcrypt.compare(pin, user.pin);
+    return bcrypt.compare(pin, user.pin) ? user._id.toString() : null;
   }
 
-  async getTokens(payload) {
+  async verifyUserExists(userId: string): Promise<boolean> {
+    return Boolean(await this.userModel.findById(userId).select('_id').exec());
+  }
+
+  async getTokens(userId: string): Promise<{ accessToken: string; refreshToken: string }> {
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload, {
-        secret: process.env.JWT_ACCESS_SECRET,
-        expiresIn: process.env.JWT_ACCESS_EXPIRATION_TIME,
-      }),
-      this.jwtService.signAsync(payload, {
-        secret: process.env.JWT_REFRESH_SECRET,
-        expiresIn: process.env.JWT_REFRESH_EXPIRATION_TIME,
-      }),
+      this.jwtService.signAsync(
+        { sub: userId },
+        {
+          secret: process.env.JWT_ACCESS_SECRET,
+          expiresIn: process.env.JWT_ACCESS_EXPIRATION_TIME,
+        },
+      ),
+      this.jwtService.signAsync(
+        { sub: userId },
+        {
+          secret: process.env.JWT_REFRESH_SECRET,
+          expiresIn: process.env.JWT_REFRESH_EXPIRATION_TIME,
+        },
+      ),
     ]);
 
     return {

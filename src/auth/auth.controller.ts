@@ -9,17 +9,17 @@ export class AuthController {
 
   @Post('/get-tokens')
   async getTokens(@Query('identifier') identifier: string, @Query('pin') pin: string) {
-    if (!(await this.authService.verifyCredentials(identifier, pin))) {
+    const userId = await this.authService.verifyCredentials(identifier, pin);
+    if (!userId) {
       throw new UnauthorizedException('Invalid credentials.');
     }
 
-    return this.authService.getTokens({ sub: identifier });
+    return this.authService.getTokens(userId);
   }
 
   @UseGuards(AuthGuard('jwt-refresh'))
   @Post('/refresh-tokens')
   async refreshTokens(@Req() req) {
-    const { sub, username } = req.user;
-    return this.authService.getTokens({ sub, username });
+    return this.authService.getTokens(req.user.id);
   }
 }
