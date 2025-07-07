@@ -1,8 +1,16 @@
-todo: finish this.
-
 # Setup & User Credentials
 
+Due to the time already spent on this exercise, I didn't end up Dockerizing it, writing tests or correcting and documenting the return codes of the REST API.
+
+Otherwise, it does work as per the requirements.
+
+In order to run this, you need to run mongodb locally and configure it in the .env file.
+
+To seed the database, run `yarn seed`.
+
 The seeder inserts 9 users with identifiers "USER[number]" and PIN that corresponds with the user number (i.e. USER1 has PIN 0001, USER2 has 0002 etc.). You can use the identifier and the PIN to obtain a signed JWT token from the corresponding endpoint.
+
+To run the API, run `yarn start:dev` and view the API docs at `http://localhost:3000/docs`.
 
 # Data Modelling Pattern
 

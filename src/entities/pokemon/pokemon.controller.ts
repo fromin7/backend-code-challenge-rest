@@ -7,8 +7,6 @@ import { PaginatedList } from 'src/entities/pokemon/pokemon.service';
 
 import { Pokemon } from './pokemon.model';
 
-// todo: validace, chyby, return codes, swagger/openapi; dto?
-
 @UseGuards(AuthGuard('jwt'))
 @Controller('pokemons')
 export class PokemonController {
