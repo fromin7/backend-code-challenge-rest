@@ -27,7 +27,7 @@ export class PokemonController {
     return this.pokemonService.getList(req.user.id, limit, offset, nameSearchQuery, typeFilter, isFavoriteFilter);
   }
 
-  @Get(':id(\\d+)')
+  @Get('id/:id')
   getPokemonById(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<Pokemon> {
     return this.pokemonService.getOneById(req.user.id, id);
   }
@@ -37,12 +37,12 @@ export class PokemonController {
     return this.pokemonService.getOneByName(req.user.id, name);
   }
 
-  @Put(':id/favorite-flag')
+  @Put('id/:id/favorite-flag')
   markAsFavorite(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.pokemonService.setFavoriteFlag(req.user.id, id);
   }
 
-  @Delete(':id/favorite-flag')
+  @Delete('id/:id/favorite-flag')
   unmarkAsFavorite(@Req() req: RequestWithUser, @Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.pokemonService.removeFavoriteFlag(req.user.id, id);
   }
